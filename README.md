@@ -10,4 +10,4 @@ https://github.com/Einstein42/nest-polyglot
 **Sample run command:**
 > docker run -d --name=polyglot -v ~/docker/polyglot:/home/polyglot/Polyglot/config --net=host -t i814u2/rpi-udi-polyglot 
 
-NOTE: This is setup as an automated build in docker hub; but those do not currently work with arm based CPU containers. I've chosen the automated build only because at first I didn't realize the limitation and now I've left it in case that limitation is removed soon. Also, updates to the README will sync at the very least.
+NOTE: This is setup as an automated build in docker hub; but those do not currently work with arm based CPU containers. I've chosen the automated build only because at first I didn't realize the limitation and now I've left it in case that limitation is removed soon. 
