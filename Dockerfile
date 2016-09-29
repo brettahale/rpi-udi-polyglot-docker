@@ -16,14 +16,17 @@ RUN apk add --update \
         build-base python-dev linux-headers git ca-certificates wget openssl-dev \
         && rm -rf /var/cache/apk/*
 
-RUN pip install --upgrade pip \
-    && pip install -r https://raw.githubusercontent.com/UniversalDevicesInc/Polyglot/unstable-release/requirements.txt \
-    && while read line; do $line; done < custom.txt
+RUN pip install --upgrade pip
 
-RUN wget https://github.com/UniversalDevicesInc/Polyglot/raw/unstable-release/bin/${binfile} -P Polyglot \
-    && chown -R ${user}:${group} /home/${user} \
-    && chmod 755 /home/${user}/Polyglot/${binfile}
+RUN mkdir Polyglot && wget https://github.com/UniversalDevicesInc/Polyglot/raw/unstable-release/bin/${binfile} -P Polyglot
+COPY pip-upgrade-all.py ./Polyglot
+COPY startup.sh ./Polyglot
+RUN chown -R ${user}:${group} /home/${user} \
+    && chmod 755 /home/${user}/Polyglot/${binfile} \
+    && chmod 755 /home/${user}/Polyglot/startup.sh
 
 USER ${user}
+RUN pip install --user -r https://raw.githubusercontent.com/UniversalDevicesInc/Polyglot/unstable-release/requirements.txt \
+    && while read line; do $line; done < custom.txt
 WORKDIR /home/${user}/Polyglot
-ENTRYPOINT ["./polyglot.linux.armv7l.pyz", "-v"]
+ENTRYPOINT ["./startup.sh"]
