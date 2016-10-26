@@ -1,3 +1,3 @@
 #!/bin/sh
 python ./pip-upgrade-all.py
-./polyglot.linux.x86_64.pyz -v
+./polyglot.linux.armv7l.pyz -v
