@@ -1,3 +1,4 @@
 #!/bin/sh
 python ./pip-upgrade-all.py
-./polyglot.linux.armv7l.pyz -v
+wget https://github.com/UniversalDevicesInc/Polyglot/raw/unstable-release/bin/`cat file.arch`
+./`cat file.arch` -v
